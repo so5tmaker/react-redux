@@ -19,13 +19,24 @@ const initialState = {
     secondName: 'Petrov'
 };
 
-function reducer(state, action) {
-    console.log(state);
-    console.log(action);
-    return state;
+function reducer(state = initialState, action) {
+    switch (action.type) {
+        case 'CHANGE_NAME':
+            return { ...state, name: action.payload }
+        case 'CHANGE_SECOND_NAME':
+            return { ...state, secondName: action.payload }
+        default:
+            return state
+    }
 };
 
 const store = createStore(reducer, initialState);
+
+console.log('subscribe', store.getState());
+
+store.subscribe(() => {
+    console.log('subscribe', store.getState());
+})
 
 const changeName = {
     type: 'CHANGE_NAME',
@@ -38,3 +49,6 @@ const changeSecondName = {
 };
 
 store.dispatch(changeName);
+//console.log(store.getState());
+store.dispatch(changeSecondName);
+//console.log(store.getState());
