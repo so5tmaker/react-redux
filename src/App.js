@@ -40,7 +40,12 @@ class App extends Component {
 }
 
 //console.log(store.getState());
+// • Actions: payloads of information that send data from your application to the store
+// – Done through store.dispatch()
 
+// Action Creators 
+// • You can see it in the ./store/actions.js file
+// – Resulting action object can be passed to the store through dispatch()
 const mapDispatchToProps = dispatch => {
   return {
     changeFirstName: bindActionCreators(changeFirstName, dispatch),
@@ -56,4 +61,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

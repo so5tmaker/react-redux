@@ -48,7 +48,9 @@ const changeSecondName = {
     payload: 'Ivanov'
 };
 
-store.dispatch(changeName);
+// • Actions: payloads of information that send data from your application to the store
+// – Done through store.dispatch()
+store.dispatch(changeName); 
 //console.log(store.getState());
 store.dispatch(changeSecondName);
 //console.log(store.getState());
