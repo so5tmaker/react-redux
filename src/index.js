@@ -1,54 +1,19 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import './index.css';
-// import App from './App';
-// import registerServiceWorker from './registerServiceWorker';
-
-// ReactDOM.render(<App />, document.getElementById('root'));
-// registerServiceWorker();
-
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import registerServiceWorker from './registerServiceWorker';
 import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { rootReducer } from './store/reducers';
 
-// initialState -> store
-// view -> action -> reducer(state, action) -> newState
-//  reducer() - pure function - the same parameters, 
-// actions and returns (state) -- (dispatcher - flux)
+export const ACTION_CHANGE_FIRST_NAME = 'ACTION_CHANGE_FIRST_NAME';
+export const ACTION_CHANGE_SECOND_NAME = 'ACTION_CHANGE_SECOND_NAME';
 
-const initialState = {
-    name: 'Paul',
-    secondName: 'Petrov'
-};
+const store = createStore(rootReducer);
 
-function reducer(state = initialState, action) {
-    switch (action.type) {
-        case 'CHANGE_NAME':
-            return { ...state, name: action.payload }
-        case 'CHANGE_SECOND_NAME':
-            return { ...state, secondName: action.payload }
-        default:
-            return state
-    }
-};
+ReactDOM.render(<Provider store={store}>
+    <App />
+</Provider>, document.getElementById('root'));
+registerServiceWorker();
 
-const store = createStore(reducer, initialState);
-
-console.log('subscribe', store.getState());
-
-store.subscribe(() => {
-    console.log('subscribe', store.getState());
-})
-
-const changeName = {
-    type: 'CHANGE_NAME',
-    payload: 'Ivan'
-};
-
-const changeSecondName = {
-    type: 'CHANGE_SECOND_NAME',
-    payload: 'Ivanov'
-};
-
-store.dispatch(changeName);
-//console.log(store.getState());
-store.dispatch(changeSecondName);
-//console.log(store.getState());
